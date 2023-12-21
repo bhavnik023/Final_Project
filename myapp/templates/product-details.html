@@ -1,0 +1,101 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Product Detail</title>
+		
+
+	<!-- Product Detail -->
+	<section class="sec-product-detail bg0 p-t-65 p-b-60">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6 col-lg-7 p-b-30">
+					<div class="p-l-25 p-r-30 p-lr-0-lg">
+						<div class="wrap-slick3 flex-sb flex-w"> 	
+								<br><br><br><br>
+							<div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
+
+							<div class="slick3 gallery-lb">
+								<div class="item-slick3" data-thumb="images/product-detail-01.jpg">
+									<div class="wrap-pic-w pos-relative">
+									<br><br>
+										<img src="{{product.product_image.url}}" alt="IMG-PRODUCT" style="width: 300px; height: 350px;">
+
+									</div>
+								</div>
+
+
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="col-md-6 col-lg-5 p-b-30">
+					<div class="p-r-50 p-t-5 p-lr-0-lg">
+						<br><br><br>
+						<h4 class="mtext-105 cl2 js-name-detail p-b-14">
+							{{product.product_name}}
+						</h4>
+
+						<span class="mtext-106 cl2">
+							{{product.product_price}}	
+						</span>
+
+						<p class="stext-102 cl3 p-t-23">
+							{{product.product_desc}}
+						</p>
+     					<p class="stext-102 cl3 p-t-23">
+							Size : {{product.product_size}}
+						</p>
+						<!--  -->
+						<div class="p-t-33">
+							<div class="flex-w flex-r-m p-b-10">
+							    </div>
+							    {% if request.session.email %}
+							    	{% if wishlist_flag == True %}
+									<a href="{% url 'remove-from-wishlist' pk=product.pk %}">
+										<button class="btn btn-danger">
+											Remove From Wishlist
+										</button>
+									{% else %}
+									<a href="{% url 'add-to-wishlist' pk=product.pk %}">
+										<button class="btn btn-primary">
+											Add To Wishlist
+										</button>
+									</a>
+									{% endif %}
+									&nbsp; &nbsp; &nbsp; &nbsp;
+									
+							    	{% if cart_flag == True %}
+									<a href="{% url 'remove-from-cart' pk=product.pk %}">
+										<button class="btn btn-danger">
+											Remove From Cart
+										</button>
+									{% else %}
+									<a href="{% url 'add-to-cart' pk=product.pk %}">
+										<button class="btn btn-primary">
+											Add To Cart
+										</button>
+									</a>
+									{% endif %}
+								{% else %}
+									<a href="{% url 'login' %}">
+										<button class="btn btn-primary">
+											Login
+										</button>
+									</a>
+								{% endif %}
+								</div>
+							</div>	
+						</div>
+					</div>
+				</div>
+			</div>
+	</section>
+
+
+</body>
+</html>
+{% endblock %}
